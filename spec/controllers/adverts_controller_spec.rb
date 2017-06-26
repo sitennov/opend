@@ -27,4 +27,29 @@ describe AdvertsController do
       expect(response).to render_template :new
     end
   end
+
+  describe 'POST #create' do
+    context 'with valid attributes' do
+      it 'save the new advert in the database' do
+        expect { post :create, params: { advert: attributes_for(:advert) }}.to change(Advert, :count).by(1)
+      end
+
+      it 'redirects to index view' do
+        post :create, params: { advert: attributes_for(:advert) }
+        expect(response).to redirect_to advert_path(assigns(:advert))
+      end
+    end
+  end
+
+  describe 'GET #show' do
+    before { get :show, params: { id: advert.id }}
+
+    it 'assings the requested advert to @advert' do
+      expect(assigns(:advert)).to eq advert
+    end
+
+    it 'renders show view' do
+      expect(response).to render_template :show
+    end
+  end
 end
