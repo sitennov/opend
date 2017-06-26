@@ -1,0 +1,8 @@
+h1 = 'Добавить свое объявление'
+
+= simple_form_for @advert do |f|
+  =f.input :firstname
+  =f.input :lastname
+  =f.input :age
+
+  =f.submit 'Create'
